@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Static page</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+      $('#btn').click(function(e) {
+      console.log('clicked');
+      $.getJSON('http://localhost:3000/links', function(result) {
+      console.log('result:');
+      console.log(result);
+      });
+      });
+      });
+    </script>
+  </head>
+  <body>
+    <p>Static page blah</p>
+    <button id="btn">Click me!</button>
+  </body>
+</html>

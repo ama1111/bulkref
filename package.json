@@ -1,0 +1,23 @@
+{
+  "name": "bulkref",
+  "version": "0.0.1",
+  "description": "bulkref =======",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ama1111/bulkref.git"
+  },
+  "author": "Alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ama1111/bulkref/issues"
+  },
+  "homepage": "https://github.com/ama1111/bulkref",
+  "dependencies": {
+    "express": "^4.10.1"
+  }
+}
