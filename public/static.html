@@ -6,10 +6,20 @@
       $(function() {
       $('#btn').click(function(e) {
       console.log('clicked');
-      $.getJSON('http://localhost:3000/links', function(result) {
-      console.log('result:');
-      console.log(result);
+
+      $.ajax({
+      url:'http://localhost:3000/links',
+      type:"POST",
+      //data:'["A Bayesian approach to star-galaxy classification"]',
+      data:'["new insight into the strategy for nitrogen metabolism in plant cells"]',
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(data) {
+      console.log("data from ajax:");
+      console.log(data);
+      }
       });
+      
       });
       });
     </script>

@@ -1,6 +1,6 @@
 {
   "name": "bulkref",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "bulkref =======",
   "main": "server.js",
   "scripts": {
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/ama1111/bulkref",
   "dependencies": {
-    "express": "^4.10.1"
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "needle": "^0.7.10"
   }
 }
