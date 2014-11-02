@@ -6,10 +6,6 @@ var bodyParser = require('body-parser');
 app.use(express.static('public'));
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
-    res.send('Hello Word!')
-})
-
 app.get('/links', function (req, res) {
     res.json({ message: 'message from links!' });
 })
