@@ -7,16 +7,26 @@
       $('#btn').click(function(e) {
       console.log('clicked');
 
+      var title = $('#title-text').val();
+      var titleData = JSON.stringify([title]);
+
       $.ajax({
       url:'http://localhost:3000/links',
       type:"POST",
       //data:'["A Bayesian approach to star-galaxy classification"]',
-      data:'["new insight into the strategy for nitrogen metabolism in plant cells"]',
+      //data:'["new insight into the strategy for nitrogen metabolism in plant cells"]',
+      //"Beta vulgaris: a dearth of antidepressant activity in mice"
+      data:titleData,
       contentType:"application/json; charset=utf-8",
       dataType:"json",
       success: function(data) {
       console.log("data from ajax:");
       console.log(data);
+
+      var citation = data.results[0].citation;
+      console.log(data.results[0].citation);
+      $("#citation").text(citation);
+      
       }
       });
       
@@ -26,6 +36,9 @@
   </head>
   <body>
     <p>Static page blah</p>
+    <input type="text" id="title-text" style="width:300px"></input>
     <button id="btn">Click me!</button>
+    <div>Citation:</div>
+    <div id="citation"></div>
   </body>
 </html>

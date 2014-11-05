@@ -1,7 +1,10 @@
 var express = require('express')
 var app = express()
+// Using needle because 'request' doesn't allow raw form data.
 var needle = require('needle');
 var bodyParser = require('body-parser');
+// Using request because needle doesn't follow redirects.
+var request = require('request');
 
 app.use(express.static('public'));
 app.use(bodyParser.json())
@@ -25,7 +28,25 @@ app.post('/links', function (req, res) {
 	function(err, resp) {
 	    console.log('returned from links');
 	    console.log(resp.body);
-	    res.json(resp.body);
+
+	    var doiUrl = resp.body.results[0].doi;
+	    console.log('doiUrl:');
+	    console.log(doiUrl);
+
+	    var options = {
+		url: doiUrl,
+		headers: {
+		    'Accept': 'text/x-bibliography; style=apa'
+		}
+	    };
+	    request(options, function(dError, dResponse, dBody) {
+		console.log('returned from doi using request');
+		console.log(dBody);
+
+		resp.body.results[0].citation = dBody;
+		res.json(resp.body);
+	    });
+
 	}
     );
 
