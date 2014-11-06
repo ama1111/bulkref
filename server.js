@@ -37,16 +37,30 @@ app.post('/links', function (req, res) {
 		url: doiUrl,
 		headers: {
 		    'Accept': 'text/x-bibliography; style=apa'
+		    //'Accept': 'application/citeproc+json'
 		}
 	    };
-	    request(options, function(dError, dResponse, dBody) {
+	    request(options, function(cError, cResponse, cBody) {
 		console.log('returned from doi using request');
-		console.log(dBody);
+		console.log(cBody);
 
-		resp.body.results[0].citation = dBody;
-		res.json(resp.body);
+		//var citation = JSON.parse(dBody);
+		resp.body.results[0].citation = cBody;
+
+		options.headers = {
+		    'Accept': 'application/citeproc+json'
+		};
+		request(options, function(dError, dResponse, dBody) {
+		    console.log('returned from doi for json');
+		    console.log(dBody);
+
+		    var d = JSON.parse(dBody);
+		    console.log(d);
+
+		    resp.body.results[0].doi = d.DOI;
+		    res.json(resp.body);		    
+		});
 	    });
-
 	}
     );
 

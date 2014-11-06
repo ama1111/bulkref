@@ -26,7 +26,10 @@
       var citation = data.results[0].citation;
       console.log(data.results[0].citation);
       $("#citation").text(citation);
-      
+
+      var doi = data.results[0].doi;
+      console.log(doi);
+      $("#doi").text(doi);
       }
       });
       
@@ -40,5 +43,7 @@
     <button id="btn">Click me!</button>
     <div>Citation:</div>
     <div id="citation"></div>
+    <div>DOI:</div>
+    <div id="doi"></div>
   </body>
 </html>
