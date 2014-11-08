@@ -3,12 +3,39 @@
     <title>Static page</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
+      var i = -1;
+      var titles;
+      
       $(function() {
       $('#btn').click(function(e) {
       console.log('clicked');
 
-      var title = $('#title-text').val();
-      var titleData = JSON.stringify([title]);
+      $("#citation").text("");
+      $("#doi").text("");
+
+      
+      var titleData;
+      if (i < 0) {
+      var multiline = $('#title-area').val();
+      titles = multiline.split('\n');
+
+      //var title = $('#title-text').val();
+      //var titleData = JSON.stringify([title]);
+	      i = 0;
+	      }
+	      else if (i >= titles.length-1) {
+	alert('done');
+	return;
+	}
+	var title = titles[i];
+	i++;
+
+	if (!title) {
+	alert('empty title');
+	return;
+	}
+	
+      titleData = JSON.stringify([title]);	      
 
       $.ajax({
       url:'http://localhost:3000/links',
@@ -39,7 +66,14 @@
   </head>
   <body>
     <p>Static page blah</p>
+    <!--
     <input type="text" id="title-text" style="width:300px"></input>
+    <br>
+    -->
+    <textarea id="title-area" cols="40" rows="5" wrap="off">A Bayesian approach to star-galaxy classification
+new insight into the strategy for nitrogen metabolism in plant cells
+Beta vulgaris: a dearth of antidepressant activity in mice
+</textarea>
     <button id="btn">Click me!</button>
     <div>Citation:</div>
     <div id="citation"></div>
