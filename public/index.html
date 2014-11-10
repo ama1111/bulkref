@@ -35,8 +35,11 @@
 	return;
 	}
 	
-      titleData = JSON.stringify([title]);	      
+	titleData = JSON.stringify([title]);	      
 
+	$('#btn').text('Thinking...');
+	$('#btn').prop('disabled', true);
+	
       $.ajax({
       url:'http://localhost:3000/links',
       type:"POST",
@@ -56,7 +59,10 @@
 
       var doi = data.results[0].doi;
       console.log(doi);
-      $("#doi").text(doi);
+	$("#doi").text(doi);
+
+	$('#btn').text('Click me!');
+	$('#btn').prop('disabled', false);
       }
       });
       
