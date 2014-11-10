@@ -61,6 +61,13 @@
       console.log(doi);
 	$("#doi").text(doi);
 
+	var current = $("#doi-area").val();
+	if (current.length > 0)
+	{
+	current += "\n";
+	}
+	$("#doi-area").val(current + doi);
+
 	$('#btn').text('Click me!');
 	$('#btn').prop('disabled', false);
       }
@@ -81,9 +88,11 @@ new insight into the strategy for nitrogen metabolism in plant cells
 Beta vulgaris: a dearth of antidepressant activity in mice
 </textarea>
     <button id="btn">Click me!</button>
-    <div>Citation:</div>
+    <div>Current Citation:</div>
     <div id="citation"></div>
-    <div>DOI:</div>
+    <div>Current DOI:</div>
     <div id="doi"></div>
+    <div>All DOIs:</div>
+    <textarea id="doi-area" cols="40" rows="5" readonly></textarea>
   </body>
 </html>
