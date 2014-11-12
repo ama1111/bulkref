@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 // Using request because needle doesn't follow redirects.
 var request = require('request');
 
+app.set('port', (process.env.PORT || 3000));
+
 app.use(express.static('public'));
 app.use(bodyParser.json())
 
@@ -68,7 +70,7 @@ app.post('/links', function (req, res) {
 
 var router = express.Router();
 
-var server = app.listen(3000, function () {
+var server = app.listen(app.get('port'), function () {
     var host = server.address().address
     var port = server.address().port
 
