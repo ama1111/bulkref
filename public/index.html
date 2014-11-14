@@ -43,9 +43,6 @@
       $.ajax({
       url:'/links',
       type:"POST",
-      //data:'["A Bayesian approach to star-galaxy classification"]',
-      //data:'["new insight into the strategy for nitrogen metabolism in plant cells"]',
-      //"Beta vulgaris: a dearth of antidepressant activity in mice"
       data:titleData,
       contentType:"application/json; charset=utf-8",
       dataType:"json",
@@ -70,7 +67,16 @@
 
 	$('#btn').text('Click me!');
 	$('#btn').prop('disabled', false);
-      }
+	},
+	error: function(jqxhr, textStatus, errorThrown) {
+	console.log("textStatus:");
+	console.log(textStatus);
+	console.log("errorThrown:");
+	console.log(errorThrown);
+	alert("Unable to find DOI for '" + title + "'");
+	$('#btn').text('Click me!');
+	$('#btn').prop('disabled', false);
+	}
       });
       
       });
