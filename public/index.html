@@ -48,7 +48,9 @@
       dataType:"json",
       success: function(data) {
       console.log("data from ajax:");
-      console.log(data);
+	console.log(data);
+
+	if (data.results[0].match) {
 
       var citation = data.results[0].citation;
       console.log(data.results[0].citation);
@@ -67,6 +69,14 @@
 
 	$('#btn').text('Click me!');
 	$('#btn').prop('disabled', false);
+
+	}
+	else {
+	alert("Didn't find match for '" + title + "'");
+	$('#btn').text('Click me!');
+	$('#btn').prop('disabled', false);
+	}
+	
 	},
 	error: function(jqxhr, textStatus, errorThrown) {
 	console.log("textStatus:");

@@ -30,7 +30,9 @@ app.post('/links', function (req, res) {
 	function(err, resp) {
 	    console.log('returned from links');
 	    console.log(resp.body);
+	    console.log('match: ' + resp.body.results[0].match);
 
+	    if (resp.body.results[0].match) {
 	    var doiUrl = resp.body.results[0].doi;
 	    console.log('doiUrl:');
 	    console.log(doiUrl);
@@ -63,9 +65,14 @@ app.post('/links', function (req, res) {
 		    res.json(resp.body);		    
 		});
 	    });
+	    }
+	    else {
+		console.log('did not match');
+		res.json(resp.body);
+	    }
+	    
 	}
     );
-
 })
 
 var router = express.Router();
