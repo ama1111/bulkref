@@ -25,10 +25,17 @@ $(function() {
 	    //var titleData = JSON.stringify([title]);
 	    i = 0;
 	}
-	else if (i >= titles.length-1) {
+
+	// Skip past empty lines
+	while (!titles[i] && i < titles.length) {
+	    i++;
+	}
+
+	if (i >= titles.length) {
 	    alert('done');
 	    return;
 	}
+
 	var title = titles[i];
 	i++;
 
