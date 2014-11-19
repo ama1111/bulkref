@@ -5,9 +5,6 @@ $(function() {
 
     var template1 = '<div class="list-group-item"><h4 class="list-group-item-heading">';
     var template2 = '</h4><img src="spinny.gif"></img>Loading...</div>';
-    //$('#result-list').append('<div class="list-group-item"><h4 class="list-group-item-heading">new insight into the strategy for nitrogen metabolism in plant cells</h4><img src="spinny.gif"></img>Loading...</div>');
-    var listItem = template1 + "beta vulgaris" + template2;
-    $('#result-list').append(listItem);
   
     $('#btn').click(function(e) {
 	console.log('clicked');
@@ -26,6 +23,15 @@ $(function() {
 	    i = 0;
 	}
 
+	var nonemptyTitles = titles.filter(function (element) {
+	    return !(!element);
+	});
+
+	nonemptyTitles.forEach(function(title) {
+	    var listItem = template1 + title + template2;
+	    $('#result-list').append(listItem);
+	});
+	
 	// Skip past empty lines
 	while (!titles[i] && i < titles.length) {
 	    i++;
