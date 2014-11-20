@@ -3,9 +3,8 @@ var titles;
 
 $(function() {
 
-    var template1 = '<div class="list-group-item"><h4 class="list-group-item-heading">';
-    var template2 = '</h4><img src="spinny.gif"></img>Loading...</div>';
-  
+    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div></div>');
+
     $('#btn').click(function(e) {
 	console.log('clicked');
 
@@ -27,8 +26,8 @@ $(function() {
 	    return !(!element);
 	});
 
-	nonemptyTitles.forEach(function(title) {
-	    var listItem = template1 + title + template2;
+	nonemptyTitles.forEach(function(title, j) {
+	    var listItem = template(title, j);
 	    $('#result-list').append(listItem);
 	});
 	
@@ -64,6 +63,8 @@ $(function() {
 	    success: function(data) {
 		console.log("data from ajax:");
 		console.log(data);
+
+		$("#loading-"+(i-1)).hide();
 
 		if (data.results[0].match) {
 
