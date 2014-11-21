@@ -3,8 +3,8 @@ var titles;
 
 $(function() {
 
-    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div></div>');
-
+    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div><div id="citation-container-{1}" style="display: none;"><p class="list-group-item-text" id="citation-text-{1}"></p><div class="btn-group"><button type="button" class="btn btn-default">Approve</button><button type="button" class="btn btn-default">Reject</button></div></div></div>');
+    
     $('#btn').click(function(e) {
 	console.log('clicked');
 
@@ -71,6 +71,9 @@ $(function() {
 		    var citation = data.results[0].citation;
 		    console.log(data.results[0].citation);
 		    $("#citation").text(citation);
+
+		    $("#citation-text-"+(i-1)).text(citation);
+		    $("#citation-container-"+(i-1)).show();
 
 		    var doi = data.results[0].doi;
 		    console.log(doi);
