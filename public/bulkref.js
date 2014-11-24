@@ -3,7 +3,7 @@ var titles;
 
 $(function() {
 
-    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div><div id="citation-container-{1}" style="display: none;"><p class="list-group-item-text" id="citation-text-{1}"></p><div class="btn-group"><button type="button" class="btn btn-default">Approve</button><button type="button" class="btn btn-default">Reject</button></div></div></div>');
+    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div><div id="citation-container-{1}" style="display: none;"><p class="list-group-item-text" id="citation-text-{1}"></p><div class="btn-group"><button type="button" class="btn btn-default">Approve</button><button type="button" class="btn btn-default">Reject</button></div></div><div id="error-text-{1}" style="display: none; color: red;"></div></div>');
 
     function onSuccess(data) {
 	console.log("data from ajax:");
@@ -30,14 +30,10 @@ $(function() {
 	    }
 	    $("#doi-area").val(current + doi);
 
-	    //$('#btn').text('Click me!');
-	    //$('#btn').prop('disabled', false);
-
 	}
 	else {
-	    alert("Didn't find match for '" + title + "'");
-	    //$('#btn').text('Click me!');
-	    //$('#btn').prop('disabled', false);
+	    $("#error-text-"+i).text("Didn't find match.");
+	    $("#error-text-"+i).show();
 	}
 
 	i++;
