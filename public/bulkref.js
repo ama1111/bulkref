@@ -9,7 +9,6 @@ $(function() {
 	console.log("data from ajax:");
 	console.log(data);
 
-	//i++;
 	$("#loading-"+i).hide();
 
 	if (data.results[0].match) {
@@ -52,7 +51,12 @@ $(function() {
 	console.log(textStatus);
 	console.log("errorThrown:");
 	console.log(errorThrown);
-	alert("Unable to find DOI for '" + title + "'");
+
+	$("#loading-"+i).hide();
+	
+	$("#error-text-"+i).text("Error making request. " + errorThrown);
+	$("#error-text-"+i).show();
+
 	$('#btn').text('Click me!');
 	$('#btn').prop('disabled', false);
 
