@@ -16,14 +16,12 @@ $(function() {
 
 	    var citation = data.results[0].citation;
 	    console.log(data.results[0].citation);
-	    $("#citation").text(citation);
 
 	    $("#citation-text-"+i).text(citation);
 	    $("#citation-container-"+i).show();
 
 	    var doi = data.results[0].doi;
 	    console.log(doi);
-	    $("#doi").text(doi);
 
 	    var current = $("#doi-area").val();
 	    if (current.length > 0)
