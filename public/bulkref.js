@@ -45,6 +45,10 @@ $(function() {
 	    title = titles[i];
 	    makeRequest(title);
 	}
+	else {
+	    $('#btn').text('Click me!');
+	    $('#btn').prop('disabled', false);
+	}
     }
 
     function onError(jqxhr, textStatus, errorThrown) {
@@ -61,6 +65,9 @@ $(function() {
     function makeRequest(title) {
 	var titleData = JSON.stringify([title]);	      
 
+	console.log('titleData: ');
+	console.log(titleData);
+
 	$.ajax({
 	    url:'/links',
 	    type:"POST",
@@ -73,6 +80,12 @@ $(function() {
     }
 
     $('#btn').click(function(e) {
+	console.log('click');
+
+	i = 0;
+
+	$('#result-list').children().remove();
+
 	var multiline = $('#title-area').val();
 	titles = multiline.split('\n').filter(function (element) {
 	    return !(!element);
