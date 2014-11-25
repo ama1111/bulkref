@@ -3,7 +3,21 @@ var titles;
 
 $(function() {
 
-    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div><div id="citation-container-{1}" style="display: none;"><p class="list-group-item-text" id="citation-text-{1}"></p><div class="btn-group"><button type="button" class="btn btn-default">Approve</button><button type="button" class="btn btn-default">Reject</button></div></div><div id="error-text-{1}" style="display: none; color: red;"></div></div>');
+    var template = jQuery.validator.format('<div class="list-group-item"><h4 class="list-group-item-heading">{0}</h4><div id="loading-{1}"><img src="spinny.gif"></img>Loading...</div><div id="citation-container-{1}" style="display: none;"><p class="list-group-item-text" id="citation-text-{1}"></p><div class="btn-group"><button type="button" class="btn btn-default" id="approve-{1}">Approve</button><button type="button" class="btn btn-default">Reject</button></div></div><div id="error-text-{1}" style="display: none; color: red;"></div><div id="doi-{1}" style="display: none;"></div></div>');
+
+    function onApproveClicked(event) {
+	console.log("onApproveClicked");
+
+	var doi = event.data;
+	console.log(doi);
+
+	var current = $("#doi-area").val();
+	if (current.length > 0)
+	{
+	    current += "\n";
+	}
+	$("#doi-area").val(current + doi);	
+    }
 
     function onSuccess(data) {
 	console.log("data from ajax:");
@@ -21,13 +35,9 @@ $(function() {
 
 	    var doi = data.results[0].doi;
 	    console.log(doi);
+	    $("#doi-"+i).text(doi);
 
-	    var current = $("#doi-area").val();
-	    if (current.length > 0)
-	    {
-		current += "\n";
-	    }
-	    $("#doi-area").val(current + doi);
+	    $("#approve-"+i).click(doi, onApproveClicked);
 
 	}
 	else {
