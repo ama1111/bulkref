@@ -12,11 +12,20 @@ $(function() {
 	console.log(doi);
 
 	var current = $("#doi-area").val();
-	if (current.length > 0)
-	{
-	    current += "\n";
+	
+	var dois = current.split('\n');
+
+	var alreadyExists = $.inArray(doi, dois) > -1;
+	if (!alreadyExists) {
+	    if (current.length > 0)
+	    {
+		current += "\n";
+	    }
+	    $("#doi-area").val(current + doi);
 	}
-	$("#doi-area").val(current + doi);	
+	else {
+	    console.log("Not adding DOI because it already exists: " + doi);
+	}
     }
 
     function onSuccess(data) {
