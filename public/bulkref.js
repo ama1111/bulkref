@@ -8,6 +8,10 @@ $(function() {
     function onApproveClicked(event) {
 	console.log("onApproveClicked");
 
+	$("#" + event.currentTarget.id)
+	    .parents(".list-group-item")
+	    .addClass("list-group-item-success");
+
 	var doi = event.data;
 	console.log(doi);
 
