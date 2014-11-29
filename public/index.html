@@ -1,4 +1,4 @@
-<html>
+<html ng-app="bulkrefApp">
   <head>
     <title>BulkRef</title>
 
@@ -14,15 +14,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-	
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+
     <script type="text/javascript" src="bulkref.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
   </head>
-  <body>
+  <body ng-controller="BulkrefCtrl">
 
     <div class="container">
       <div class="row">
 	<div class="col-md-6">
-	  
+
+	  <ul>
+	    <li ng-repeat="name in names">
+	      <p>{{name}}</p>
+	    </li>
+	  </ul>
+
 	  <p>Titles to search for:</p>
 	  <!--
 	      <input type="text" id="title-text" style="width:300px"></input>
@@ -32,10 +41,11 @@ A Bayesian approach to star-galaxy classification
 new insight into the strategy for nitrogen metabolism in plant cells
 Beta vulgaris: a dearth of antidepressant activity in mice
 	      -->
-	  <textarea id="title-area" cols="40" rows="5" wrap="off"></textarea>
+	  <textarea id="title-area" cols="40" rows="5" wrap="off"
+		    ng-model="names" ng-list="&#10;" ng-trim="false"></textarea>
 
 	  <button id="btn" type="button" class="btn btn-primary">Click me!</button>
-    
+
 	  <div>All DOIs:</div>
 	  <textarea id="doi-area" cols="40" rows="5" readonly></textarea>
 
@@ -68,6 +78,6 @@ Beta vulgaris: a dearth of antidepressant activity in mice
 	</div>
       </div>
     </div>
-    
+
   </body>
 </html>
