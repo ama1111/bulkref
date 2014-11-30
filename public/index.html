@@ -46,8 +46,8 @@
     <div class="col-md-6">
       <div class="list-group" id="result-list">
 
-        <div class="list-group-item" ng-repeat="title in titles">
-          <h4 class="list-group-item-heading">{{title}}</h4>
+        <div class="list-group-item" ng-repeat="result in results">
+          <h4 class="list-group-item-heading">{{result.searchTerm}}</h4>
           <div id="loading-{{$index}}">
             <img src="spinny.gif"></img>
             Loading...

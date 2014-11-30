@@ -56,8 +56,8 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       }
 
       i++;
-      if (i < $scope.titles.length) {
-        title = $scope.titles[i];
+      if (i < $scope.results.length) {
+        title = $scope.results[i].searchTerm;
         makeRequest(title);
       }
       else {
@@ -105,9 +105,13 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       $('#btn').text('Thinking...');
       $('#btn').prop('disabled', true);
 
-      $scope.titles = $scope.names;
+      $scope.results = $.map($scope.names, function(item) {
+        return {
+          searchTerm: item
+        };
+      });
       i = 0;
-      var title = $scope.titles[i];
+      var title = $scope.results[i].searchTerm;
       makeRequest(title);
     };
   });
