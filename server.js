@@ -62,7 +62,7 @@ app.post('/links', function (req, res) {
 		    console.log(d);
 
 		    resp.body.results[0].doi = d.DOI;
-		    res.json(resp.body);		    
+		    res.json(resp.body);
 		});
 	    });
 	    }
@@ -70,7 +70,7 @@ app.post('/links', function (req, res) {
 		console.log('did not match');
 		res.json(resp.body);
 	    }
-	    
+
 	}
     );
 })
@@ -83,5 +83,3 @@ var server = app.listen(app.get('port'), function () {
 
     console.log('Example app listening at http://%s:%s', host, port)
 })
-
-
