@@ -48,7 +48,7 @@
 
         <div class="list-group-item" ng-repeat="result in results">
           <h4 class="list-group-item-heading">{{result.searchTerm}}</h4>
-          <div id="loading-{{$index}}">
+          <div id="loading-{{$index}}" ng-show="result.loading">
             <img src="spinny.gif"></img>
             Loading...
           </div>

@@ -33,7 +33,9 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       console.log("data from ajax:");
       console.log(data);
 
-      $("#loading-"+i).hide();
+      $scope.$apply(function (){
+        $scope.results[i].loading = false;
+      });
 
       if (data.results[0].match) {
 
@@ -72,7 +74,9 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       console.log("errorThrown:");
       console.log(errorThrown);
 
-      $("#loading-"+i).hide();
+      $scope.$apply(function (){
+        $scope.results[i].loading = false;
+      });
 
       $("#error-text-"+i).text("Error making request. " + errorThrown);
       $("#error-text-"+i).show();
@@ -107,7 +111,8 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
 
       $scope.results = $.map($scope.names, function(item) {
         return {
-          searchTerm: item
+          searchTerm: item,
+          loading: true
         };
       });
       i = 0;
