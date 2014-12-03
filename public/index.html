@@ -46,7 +46,8 @@
     <div class="col-md-6">
       <div class="list-group" id="result-list">
 
-        <div class="list-group-item" ng-repeat="result in results">
+        <div class="list-group-item" ng-repeat="result in results"
+        ng-class="{'list-group-item-success': result.approved}">
           <h4 class="list-group-item-heading">{{result.searchTerm}}</h4>
           <div id="loading-{{$index}}" ng-show="result.loading">
             <img src="spinny.gif"></img>
@@ -56,7 +57,8 @@
           <div id="citation-container-{{$index}}" style="display: none;">
             <p class="list-group-item-text" id="citation-text-{{$index}}"></p>
             <div class="btn-group">
-              <button type="button" class="btn btn-default" id="approve-{{$index}}">Approve</button>
+              <button type="button" class="btn btn-default" id="approve-{{$index}}"
+              ng-click="onApproveClicked(result)">Approve</button>
               <!--<button type="button" class="btn btn-default">Reject</button>-->
             </div>
           </div>

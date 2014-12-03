@@ -2,14 +2,13 @@ var bulkrefApp = angular.module('bulkrefApp', []);
 
 bulkrefApp.controller('BulkrefCtrl', function ($scope) {
 
-  function onApproveClicked(event) {
+  $scope.onApproveClicked = function(result) {
     console.log("onApproveClicked");
+    console.log(result);
 
-    $("#" + event.currentTarget.id)
-    .parents(".list-group-item")
-    .addClass("list-group-item-success");
+    result.approved = true;
 
-    var doi = event.data;
+    var doi = result.doi;
     console.log(doi);
 
     var current = $("#doi-area").val();
@@ -27,7 +26,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       else {
         console.log("Not adding DOI because it already exists: " + doi);
       }
-    }
+    };
 
     function onSuccess(data) {
       console.log("data from ajax:");
@@ -49,7 +48,10 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
         console.log(doi);
         $("#doi-"+i).text(doi);
 
-        $("#approve-"+i).click(doi, onApproveClicked);
+        // TODO: Already calling $scope.$apply in onSuccess so try to combine these.
+        $scope.$apply(function (){
+          $scope.results[i].doi = doi;
+        });
 
       }
       else {
@@ -112,7 +114,8 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       $scope.results = $.map($scope.names, function(item) {
         return {
           searchTerm: item,
-          loading: true
+          loading: true,
+          approved: false
         };
       });
       i = 0;
