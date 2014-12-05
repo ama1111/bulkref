@@ -37,8 +37,6 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       $("#citation-container-"+i).show();
 
       var doi = data.results[0].doi;
-      console.log(doi);
-      $("#doi-"+i).text(doi);
 
       // TODO: Already calling $scope.$apply in onSuccess so try to combine these.
       $scope.$apply(function (){
