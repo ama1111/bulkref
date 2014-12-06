@@ -44,23 +44,23 @@
 
     </div>
     <div class="col-md-6">
-      <div class="list-group" id="result-list">
+      <div class="list-group">
 
         <div class="list-group-item" ng-repeat="result in results"
         ng-class="{'list-group-item-success': result.approved}">
 
           <h4 class="list-group-item-heading">{{result.searchTerm}}</h4>
 
-          <div id="loading-{{$index}}" ng-show="result.loading">
+          <div ng-show="result.state === 'Loading'">
             <img src="spinny.gif"></img>
             Loading...
           </div>
 
-          <div id="citation-container-{{$index}}" style="display: none;">
-            <p class="list-group-item-text" id="citation-text-{{$index}}"></p>
+          <div ng-show="result.state == 'Completed'">
+            <p class="list-group-item-text">{{result.citation}}</p>
 
             <div class="btn-group">
-              <button type="button" class="btn btn-default" id="approve-{{$index}}"
+              <button type="button" class="btn btn-default"
               ng-click="onApproveClicked(result)">Approve</button>
               <!--<button type="button" class="btn btn-default">Reject</button>-->
             </div>

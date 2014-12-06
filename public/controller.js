@@ -2,7 +2,12 @@ var bulkrefApp = angular.module('bulkrefApp', []);
 
 bulkrefApp.controller('BulkrefCtrl', function ($scope) {
 
-  $scope.dois = [];
+  var StateEnum = {
+    Loading: "Loading",
+    Completed: "Completed",
+    Failed: "Failed"
+  };
+  Object.freeze(StateEnum);
 
   $scope.onApproveClicked = function(result) {
     console.log("onApproveClicked");
@@ -33,14 +38,13 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
       var citation = data.results[0].citation;
       console.log(data.results[0].citation);
 
-      $("#citation-text-"+i).text(citation);
-      $("#citation-container-"+i).show();
-
       var doi = data.results[0].doi;
 
       // TODO: Already calling $scope.$apply in onSuccess so try to combine these.
       $scope.$apply(function (){
+        $scope.results[i].citation = citation;
         $scope.results[i].doi = doi;
+        $scope.results[i].state = StateEnum.Completed;
       });
 
     }
@@ -104,7 +108,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
     $scope.results = $.map($scope.names, function(item) {
       return {
         searchTerm: item,
-        loading: true,
+        state: StateEnum.Loading,
         approved: false
       };
     });
