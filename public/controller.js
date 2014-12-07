@@ -1,6 +1,6 @@
 var bulkrefApp = angular.module('bulkrefApp', []);
 
-bulkrefApp.controller('BulkrefCtrl', function ($scope) {
+bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
 
   var StateEnum = {
     Loading: "Loading",
@@ -29,10 +29,6 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
     console.log("data from ajax:");
     console.log(data);
 
-    $scope.$apply(function (){
-      $scope.results[i].loading = false;
-    });
-
     if (data.results[0].match) {
 
       var citation = data.results[0].citation;
@@ -40,15 +36,13 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
 
       var doi = data.results[0].doi;
 
-      // TODO: Already calling $scope.$apply in onSuccess so try to combine these.
-      $scope.$apply(function (){
-        $scope.results[i].citation = citation;
-        $scope.results[i].doi = doi;
-        $scope.results[i].state = StateEnum.Completed;
-      });
+      $scope.results[i].citation = citation;
+      $scope.results[i].doi = doi;
+      $scope.results[i].state = StateEnum.Completed;
 
     }
     else {
+      $scope.results[i].state = StateEnum.Failed;
       $("#error-text-"+i).text("Didn't find match.");
       $("#error-text-"+i).show();
     }
@@ -64,17 +58,15 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
     }
   }
 
-  function onError(jqxhr, textStatus, errorThrown) {
-    console.log("textStatus:");
-    console.log(textStatus);
-    console.log("errorThrown:");
-    console.log(errorThrown);
+  function onError(data, status) {
+    console.log("data");
+    console.log(data);
+    console.log("status:");
+    console.log(status);
 
-    $scope.$apply(function (){
-      $scope.results[i].loading = false;
-    });
+    $scope.results[i].state = StateEnum.Failed;
 
-    $("#error-text-"+i).text("Error making request. " + errorThrown);
+    $("#error-text-"+i).text("Error making request. " + status);
     $("#error-text-"+i).show();
 
     $('#btn').text('Click me!');
@@ -88,15 +80,9 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope) {
     console.log('titleData: ');
     console.log(titleData);
 
-    $.ajax({
-      url:'/links',
-      type:"POST",
-      data:titleData,
-      contentType:"application/json; charset=utf-8",
-      dataType:"json",
-      success: onSuccess,
-      error: onError
-    });
+    $http.post('/links', titleData)
+    .success(onSuccess)
+    .error(onError);
   }
 
   $scope.start = function() {
