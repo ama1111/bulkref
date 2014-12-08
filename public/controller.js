@@ -9,6 +9,8 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
   };
   Object.freeze(StateEnum);
 
+  $scope.processing = false;
+
   $scope.onApproveClicked = function(result) {
     console.log("onApproveClicked");
     console.log(result);
@@ -52,8 +54,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
       makeRequest(title);
     }
     else {
-      $('#btn').text('Click me!');
-      $('#btn').prop('disabled', false);
+      $scope.processing = false;
     }
   }
 
@@ -67,9 +68,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
 
     $scope.results[i].errorText = "Error making request. " + status;
 
-    $('#btn').text('Click me!');
-    $('#btn').prop('disabled', false);
-
+    $scope.processing = false;
   }
 
   function makeRequest(title) {
@@ -86,8 +85,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
   $scope.start = function() {
     console.log('start');
 
-    $('#btn').text('Thinking...');
-    $('#btn').prop('disabled', true);
+    $scope.processing = true;
 
     $scope.results = $.map($scope.names, function(item) {
       return {
