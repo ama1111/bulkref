@@ -4,20 +4,14 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-  <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
-
   <script type="text/javascript" src="controller.js"></script>
+
 </head>
 <body ng-controller="BulkrefCtrl">
 
@@ -34,10 +28,10 @@
         new insight into the strategy for nitrogen metabolism in plant cells
         Beta vulgaris: a dearth of antidepressant activity in mice
       -->
-      <textarea id="title-area" cols="40" rows="5" wrap="off"
+      <textarea cols="40" rows="5" wrap="off"
       ng-model="names" ng-list="&#10;" ng-trim="false"></textarea>
 
-      <button id="btn" type="button" class="btn btn-primary" ng-click="start()"
+      <button type="button" class="btn btn-primary" ng-click="start()"
       ng-disabled="processing">
         {{processing ? "Processing" : "Start"}}
       </button>
@@ -69,7 +63,7 @@
             </div>
 
           </div>
-          <div id="error-text-{{$index}}" ng-show="result.state === 'Failed'" style="color: red;">
+          <div ng-show="result.state === 'Failed'" style="color: red;">
             {{result.errorText}}
           </div>
 
