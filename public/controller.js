@@ -43,8 +43,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
     }
     else {
       $scope.results[i].state = StateEnum.Failed;
-      $("#error-text-"+i).text("Didn't find match.");
-      $("#error-text-"+i).show();
+      $scope.results[i].errorText = "Didn't find match.";
     }
 
     i++;
@@ -66,8 +65,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
 
     $scope.results[i].state = StateEnum.Failed;
 
-    $("#error-text-"+i).text("Error making request. " + status);
-    $("#error-text-"+i).show();
+    $scope.results[i].errorText = "Error making request. " + status;
 
     $('#btn').text('Click me!');
     $('#btn').prop('disabled', false);
