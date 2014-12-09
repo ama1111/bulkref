@@ -48,6 +48,10 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
       $scope.results[i].errorText = "Didn't find match.";
     }
 
+    doNextTitle();
+  }
+
+  function doNextTitle() {
     i++;
     if (i < $scope.results.length) {
       title = $scope.results[i].searchTerm;
@@ -68,7 +72,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
 
     $scope.results[i].errorText = "Error making request. " + status;
 
-    $scope.processing = false;
+    doNextTitle();
   }
 
   function makeRequest(title) {
