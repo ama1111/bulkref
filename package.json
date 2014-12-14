@@ -4,6 +4,10 @@
   "description": "bulkref =======",
   "main": "server.js",
   "scripts": {
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractor-conf.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -25,5 +29,11 @@
     "express": "^4.10.1",
     "needle": "^0.7.10",
     "request": "^2.47.0"
+  },
+  "devDependencies": {
+    "karma": "^0.12.16",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "protractor": "~1.0.0"
   }
 }
