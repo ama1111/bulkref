@@ -51,8 +51,6 @@ describe('bulkref suite', function() {
         i++;
       });
     });
-
-
   });
 
   it('should show "Did not find match"', function() {
@@ -79,7 +77,36 @@ describe('bulkref suite', function() {
       expect(results.last().element(by.css('.list-group-item-text')).getText())
       .toContain(expectedDoi);
     });
+  });
 
+  it('should add doi when approve clicked', function() {
 
+    var searchTerms = [
+    'Lifetime costs for medical services: a methodological review.',
+    'The effect of renal insufficiency on workforce participation in the United States: an analysis using National Health and Nutrition Examination Survey III data.'
+    ];
+    var expectedDois = [
+    '10.1017/s0266462303000254',
+    '10.1053/ajkd.2002.36854'
+    ].join('\n');
+
+    browser.get('http://localhost:3000/');
+
+    element(by.model('names')).sendKeys(searchTerms.join('\n'));
+
+    element(by.id('btn-start')).click();
+
+    browser.waitForAngular().then(function (v){
+      var results = element.all(by.repeater('result in results'));
+      expect(results.count()).toEqual(2);
+
+      element(by.id('btn-approve-0')).click().then(function(){
+
+        element(by.id('btn-approve-1')).click().then(function(){
+          expect(element(by.id('doi-area')).getAttribute('value')).toEqual(expectedDois);
+        });
+
+      });
+    });
   });
 });
