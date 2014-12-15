@@ -63,7 +63,7 @@
             </div>
 
           </div>
-          <div ng-show="result.state === 'Failed'" style="color: red;">
+          <div id="error-text-{{$index}}" ng-show="result.state === 'Failed'" style="color: red;">
             {{result.errorText}}
           </div>
 

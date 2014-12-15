@@ -54,4 +54,32 @@ describe('bulkref suite', function() {
 
 
   });
+
+  it('should show "Did not find match"', function() {
+
+    var searchTerms = [
+    'WHAT CAN ROLLING REGRESSIONS TELL US ABOUT SYSTEMATIC RISK?',
+    'Work losses related to inflammatory bowel disease in Canada: results from a National Population Health Survey.'
+    ];
+    var expectedDoi = '10.1111/j.1572-0241.2003.07378.x';
+
+    browser.get('http://localhost:3000/');
+
+    element(by.model('names')).sendKeys(searchTerms.join('\n'));
+
+    element(by.id('btn-start')).click();
+
+    browser.waitForAngular().then(function (v){
+      var results = element.all(by.repeater('result in results'));
+      expect(results.count()).toEqual(2);
+
+      expect(results.first().element(by.id('error-text-0')).getText())
+      .toEqual('Didn\'t find match.');
+
+      expect(results.last().element(by.css('.list-group-item-text')).getText())
+      .toContain(expectedDoi);
+    });
+
+
+  });
 });
