@@ -109,4 +109,31 @@ describe('bulkref suite', function() {
       });
     });
   });
+
+  it('should show "Found an entry but not citation"', function() {
+
+    var searchTerms = [
+    'Children in the information technology design process: A review of theories and their applications',
+    'Bonded design: A methodology for designing with children'
+    ];
+    var expectedDoi = '10.1016/j.lisr.2003.12.002';
+
+    browser.get('http://localhost:3000/');
+
+    element(by.model('names')).sendKeys(searchTerms.join('\n'));
+
+    element(by.id('btn-start')).click();
+
+    browser.waitForAngular().then(function (v){
+      var results = element.all(by.repeater('result in results'));
+      expect(results.count()).toEqual(2);
+
+      expect(results.first().element(by.css('.list-group-item-text')).getText())
+      .toContain(expectedDoi);
+
+      expect(results.last().element(by.id('error-text-1')).getText())
+      .toContain('Found an entry in CrossRef but did not find the citation on doi.org.');
+
+    });
+  });
 });

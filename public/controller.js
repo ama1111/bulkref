@@ -45,7 +45,10 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
     }
     else {
       $scope.results[i].state = StateEnum.Failed;
-      $scope.results[i].errorText = "Didn't find match.";
+      var errorText = "Didn't find match.";
+      if (data.results[0].errorText)
+        errorText = data.results[0].errorText;
+      $scope.results[i].errorText = errorText;
     }
 
     doNextTitle();

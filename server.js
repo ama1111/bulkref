@@ -58,11 +58,21 @@ app.post('/links', function (req, res) {
             console.log('returned from doi for json');
             console.log(dBody);
 
-            var d = JSON.parse(dBody);
-            console.log(d);
+            try {
+              var d = JSON.parse(dBody);
+              console.log(d);
 
-            resp.body.results[0].doi = d.DOI;
-            res.json(resp.body);
+              resp.body.results[0].doi = d.DOI;
+              res.json(resp.body);
+            } catch (e) {
+              console.log('error parsing or responding');
+              console.log(e);
+              resp.body.results = [{
+                match: false,
+                errorText: 'Found an entry in CrossRef but did not find the citation on doi.org. ' + doiUrl
+              }];
+              res.json(resp.body);
+            }
           });
         });
       }
