@@ -16,8 +16,9 @@
 <body ng-controller="BulkrefCtrl">
 
   <div class="container">
+
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-8">
 
         <p>Titles to search for:</p>
         <!--
@@ -28,19 +29,17 @@
         new insight into the strategy for nitrogen metabolism in plant cells
         Beta vulgaris: a dearth of antidepressant activity in mice
       -->
-      <textarea cols="40" rows="5" wrap="off"
+      <textarea style="width:100%" rows="5" wrap="off"
       ng-model="names" ng-list="&#10;" ng-trim="false"></textarea>
 
+      <br/>
+      <br/>
       <button id="btn-start" type="button" class="btn btn-primary" ng-click="start()"
       ng-disabled="processing">
         {{processing ? "Processing" : "Start"}}
       </button>
+      <br/>
 
-      <div>All DOIs:</div>
-      <textarea id="doi-area" cols="40" rows="5" ng-model="dois" ng-list="&#10;" ng-trim="false"></textarea>
-
-    </div>
-    <div class="col-md-6">
       <div class="list-group">
 
         <div class="list-group-item" ng-repeat="result in results"
@@ -70,6 +69,14 @@
         </div>
 
       </div>
+
+    </div>
+
+    <div class="col-sm-4">
+
+      <p>Approved DOIs:</p>
+      <textarea id="doi-area" style="width:100%; height:95%" rows="5" ng-model="dois" ng-list="&#10;" ng-trim="false"></textarea>
+
     </div>
   </div>
 
