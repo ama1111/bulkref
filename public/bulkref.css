@@ -1,0 +1,11 @@
+#content {
+  width:75%
+}
+
+#sidebar {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  height: 90%;
+  width: 25%
+}
