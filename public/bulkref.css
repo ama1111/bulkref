@@ -1,3 +1,8 @@
+#root {
+  width: 90%;
+  margin: 0 auto;
+}
+
 #content {
   position: absolute;
   width: 60%;
@@ -7,6 +12,14 @@
 #sidebar {
   position: fixed;
   right: 20px;
-  height: 90%;
+  height: 75%;
   width: 30%;
+}
+
+#search-terms {
+  width: 100%;
+}
+
+#btn-start {
+  margin: 10px 0px;
 }
