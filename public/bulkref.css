@@ -1,25 +1,41 @@
 #root {
   width: 90%;
+  height: 80%;
   margin: 0 auto;
 }
 
 #content {
-  position: absolute;
+  float: left;
   width: 60%;
-  left: 20px;
+  height: 100%;
+  overflow: auto;
+  margin-right: 20px;
 }
 
 #sidebar {
-  position: fixed;
-  right: 20px;
-  height: 75%;
+  float: left;
   width: 30%;
-}
-
-#search-terms {
-  width: 100%;
 }
 
 #btn-start {
   margin: 10px 0px;
+}
+
+
+textarea {
+  resize: none;
+  border: 2px solid #b1b1b1;
+}
+
+.text-label {
+  margin-bottom: 0px;
+}
+
+#search-area {
+  width: 100%;
+}
+
+#doi-area {
+  width:100%;
+  height:95%;
 }

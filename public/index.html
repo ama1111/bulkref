@@ -23,17 +23,17 @@
       <h1>BulkRef <small>Make a batch request to CrossRef to get multiple DOIs</small></h1>
     </div>
 
-
     <div id="content">
 
-      <p>Titles to search for:</p>
-      <textarea id="search-terms" rows="5" wrap="off"
+      <p class="text-label">Titles to search for:</p>
+      <textarea id="search-area" rows="5" wrap="off"
       ng-model="names" ng-list="&#10;" ng-trim="false"></textarea>
 
       <button id="btn-start" type="button" class="btn btn-primary" ng-click="start()"
       ng-disabled="processing">
         {{processing ? "Processing" : "Start"}}
       </button>
+
 
       <div class="list-group">
 
@@ -67,9 +67,11 @@
     </div>
 
     <div id="sidebar">
-      <p>Approved DOIs:</p>
-      <textarea id="doi-area" style="width:100%; height:95%" wrap="off"
+      <p class="text-label">Approved DOIs:</p>
+
+      <textarea id="doi-area" wrap="off"
       ng-model="dois" ng-list="&#10;" ng-trim="false"></textarea>
+
     </div>
 
   </div>
