@@ -29,10 +29,14 @@ app.post('/links', function (req, res) {
     {},
     function(err, resp) {
       console.log('returned from links');
-      console.log(resp.body);
-      console.log('match: ' + resp.body.results[0].match);
 
-      if (resp.body.results[0].match) {
+      if (resp && resp.body &&
+        resp.body.results && resp.body.results.length > 0 &&
+        resp.body.results[0].match)
+      {
+        console.log(resp.body);
+        console.log('match: ' + resp.body.results[0].match);
+
         var doiUrl = resp.body.results[0].doi;
         console.log('doiUrl:');
         console.log(doiUrl);
@@ -78,6 +82,11 @@ app.post('/links', function (req, res) {
       }
       else {
         console.log('did not match');
+        if (!resp || !resp.body) {
+            console.log('resp or resp.body is not defined');
+            resp = {body: { results: [{match: false}]}};
+        }
+        console.log(resp.body);
         res.json(resp.body);
       }
 

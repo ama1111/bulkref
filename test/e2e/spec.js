@@ -136,4 +136,25 @@ describe('bulkref suite', function() {
 
     });
   });
+
+  it('should not crash on this request', function() {
+
+    var searchTerms = [
+    'Self-esteem and body image satisfaction in a morbidly obese pre-gastric bypass surgery (GBS) population: Correlated more with BMI than waist hip ratio (WHR)?'
+    ];
+
+    browser.get('http://localhost:3000/');
+
+    element(by.model('names')).sendKeys(searchTerms.join('\n'));
+
+    element(by.id('btn-start')).click();
+
+    browser.waitForAngular().then(function (v){
+      var results = element.all(by.repeater('result in results'));
+      expect(results.count()).toEqual(1);
+
+      expect(results.first().element(by.id('error-text-0')).getText())
+      .toEqual('Didn\'t find match.');
+    });
+  });
 });
