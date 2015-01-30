@@ -157,4 +157,26 @@ describe('bulkref suite', function() {
       .toEqual('Didn\'t find match.');
     });
   });
+
+  it('should not crash on with percent sign', function() {
+
+    var searchTerms = [
+    'Uniformly positive (> 80%) HER2 expression maximizes sensitivity and specificity for prediction of response to trastuzumab in CALGB 9840.'
+    ];
+    var expectedDoi = '10.1158/0008-5472.sabcs-6046';
+
+    browser.get('http://localhost:3000/');
+
+    element(by.model('names')).sendKeys(searchTerms.join('\n'));
+
+    element(by.id('btn-start')).click();
+
+    browser.waitForAngular().then(function (v){
+      var results = element.all(by.repeater('result in results'));
+      expect(results.count()).toEqual(1);
+
+      expect(results.first().element(by.css('.list-group-item-text')).getText())
+      .toContain(expectedDoi);
+    });
+  });
 });

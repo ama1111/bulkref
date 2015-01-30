@@ -31,7 +31,8 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
     console.log("data from ajax:");
     console.log(data);
 
-    if (data.results[0].match) {
+    var hasResults = data.hasOwnProperty('results');
+    if (hasResults && data.results[0].match) {
 
       var citation = data.results[0].citation;
       console.log(data.results[0].citation);
@@ -46,7 +47,7 @@ bulkrefApp.controller('BulkrefCtrl', function ($scope, $http) {
     else {
       $scope.results[i].state = StateEnum.Failed;
       var errorText = "Didn't find match.";
-      if (data.results[0].errorText)
+      if (hasResults && data.results[0].errorText)
         errorText = data.results[0].errorText;
       $scope.results[i].errorText = errorText;
     }

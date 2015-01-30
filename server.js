@@ -21,11 +21,12 @@ app.post('/links', function (req, res) {
 
   console.log(req.body);
   console.log('stringify:');
-  console.log(JSON.stringify(req.body));
+  var stringified = JSON.stringify(req.body).replace("%", "");
+  console.log(stringified);
 
   needle.post(
     'http://search.crossref.org/links',
-    JSON.stringify(req.body),
+    stringified,
     {},
     function(err, resp) {
       console.log('returned from links');
