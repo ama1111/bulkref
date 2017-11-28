@@ -25,7 +25,7 @@ app.post('/links', function (req, res) {
   console.log(stringified);
 
   needle.post(
-    'http://search.crossref.org/links',
+    'https://search.crossref.org/links',
     stringified,
     {},
     function(err, resp) {
