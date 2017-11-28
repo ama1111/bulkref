@@ -28,7 +28,7 @@
     "body-parser": "^1.9.2",
     "express": "^4.10.1",
     "needle": "^0.7.10",
-    "request": "^2.47.0"
+    "request": "2.47.0"
   },
   "devDependencies": {
     "karma": "^0.12.16",
